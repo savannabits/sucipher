@@ -1,10 +1,11 @@
-# Very short description of the package
+# SUCIPHER
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/savannabits/sucipher.svg?style=flat-square)](https://packagist.org/packages/savannabits/sucipher)
 [![Total Downloads](https://img.shields.io/packagist/dt/savannabits/sucipher.svg?style=flat-square)](https://packagist.org/packages/savannabits/sucipher)
 ![GitHub Actions](https://github.com/savannabits/sucipher/actions/workflows/main.yml/badge.svg)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+A simple tool to manage AES encryption using openssl. This is designed to gain compatibility with Java's `javax.crypto`
+package.
 
 ## Installation
 
@@ -16,8 +17,20 @@ composer require savannabits/sucipher
 
 ## Usage
 
+### Config:
+Add the following keys to your .env file:
+```dotenv
+SUCIPHER_IV="" #Your Initialization vector
+SUCIPHER_SECRET_KEY="" #16, 24 or 32 chars depending on the CIPHER used
+SUCIPHER_CIPHER="" # e.g aes-128-cbc
+```
 ```php
-// Usage description here
+// Encrypt A Plain String:
+$data = "Test Message"
+$encrypted = app('sucipher')->encrypt($data); // The output is base64 encoded
+
+// Decrypt an encrypted string: (The input should be a base64-encoded decrypted string
+$decrypted = app('sucipher')->decrypt($encrypted); // Output: 'Test Message'
 ```
 
 ### Testing
@@ -46,7 +59,3 @@ If you discover any security related issues, please email smaosa@savannabits.com
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
